@@ -7,7 +7,7 @@ source myenv/bin/activate
 
 
 # set ENV variable
-export $FLASK_APP=hex_be
+export $FLASK_APP=run.py
 
 
 # run the application

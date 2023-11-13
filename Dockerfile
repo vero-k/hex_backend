@@ -15,7 +15,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 ## Copy the current directory contents into the container at /backend
-COPY . .
+COPY . /backend
 
 ## Expose port 8000 to access the Flask app. (default port is 8000), in production. Since Gunicorn uses
 EXPOSE 8000
@@ -25,10 +25,11 @@ EXPOSE 8000
 ## - PYTHONUNBUFFERED: prevents Python from buffering stdout and stderr (equivalent to python -u option)
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV FLASK_APP hex_be
+ENV FLASK_APP hex_be:create_app()
 ENV FLASK_ENV production
 
 ## for production
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "hex_be:app"]
+## 4 worker processes started
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "hex_be:create_app()"]
 
 
