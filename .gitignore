@@ -1,2 +1,10 @@
 .venv/
 .vscode/
+myenv/
+
+__pycache__
+
+database.db
+
+.env
+.dev_dockerfile.txt
