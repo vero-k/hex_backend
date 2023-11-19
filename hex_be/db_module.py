@@ -33,7 +33,7 @@ def db_exists():
         connection = sqlite3.connect(current_app.config['DATABASE'])
         cursor = connection.cursor()
         if cursor is not None:
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='your_table_name';")
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='player';")
             if cursor.fetchone() is not None:
                 connection.close()
                 return True

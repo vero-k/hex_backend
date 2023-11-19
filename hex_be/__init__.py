@@ -40,10 +40,6 @@ def create_app(config=None):
         return "test it"
 
 
-    @app.before_request
-    def load_app():
-        return ""
-
     @app.teardown_appcontext
     def teardown_db(exception):
         close_db()

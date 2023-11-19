@@ -34,7 +34,10 @@ def mod_img(img):
     elif op == 'mirror':
         mod_img = ImageOps.mirror(img)
     elif op == 'blend':
-        cat_img = Image.open(os.path.join('hex_be', 'kitty.png'))
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        icon_directory = os.path.join(BASE_DIR, 'static', 'images', 'icons')
+        path_to_img = os.path.join(icon_directory, 'kitty.png')
+        cat_img = Image.open(path_to_img)
         width, height = img.size
         cat_img = cat_img.crop((0, 0, width, height))
         mod_img = Image.blend(img, cat_img, 0.5)
@@ -45,7 +48,10 @@ def mod_img(img):
     elif op == 'colorinvert':
         mod_img = ImageChops.invert(img)
     elif op == 'cat':
-        cat_img = Image.open(os.path.join('hex_be', 'kitty.png'))
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        icon_directory = os.path.join(BASE_DIR, 'static', 'images', 'icons')
+        path_to_img = os.path.join(icon_directory, 'kitty.png')
+        cat_img = Image.open(path_to_img)
         width, height = img.size
         cat_img = cat_img.crop((0, 0, width, height))
         mod_img = cat_img
