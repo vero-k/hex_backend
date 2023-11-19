@@ -3,8 +3,15 @@
 myenv/
 
 __pycache__
+**/__pycache__/
+
 
 database.db
 
 .env
 .dev_dockerfile.txt
+
+hex_be/static/images/baseimg/*
+hex_be/static/images/levelone*
+hex_be/static/images/leveltwo/*
+hex_be/static/images/rastered/*
