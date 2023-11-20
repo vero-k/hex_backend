@@ -123,15 +123,6 @@ def getimage():
 
     current_img = request.args.get('currentImg') + '.jpg'
 
-    #upload_dir_raster = "hex_be" + Config.UPLOAD_DIR_RASTER_DONE
-
-    #new_dir = secure_filename(user_id)
-    #file_name = secure_filename(current_img + ".jpg")
-
-    #upload_raster = os.path.join(upload_dir_raster, new_dir)
-    # path_to_img = os.path.join('', current_img + '.jpg')
-    # print(path_to_img)
-
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     images_directory = os.path.join(BASE_DIR, 'static', 'images', 'rastered', user_id)
     path_to_img = os.path.join(images_directory, current_img)
@@ -143,6 +134,24 @@ def getimage():
   
 
 
+@game.route('/get-all-images', methods=["GET"])
+def getallimages():
+    user_id = request.args.get('userID')
+    count = request.args.get('count')
+
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    images_directory = os.path.join(BASE_DIR, 'static', 'images', 'rastered', user_id)
+
+    images = []
+    for i in range(0, len(count)):
+        images.append(str(i) + ".jpg")
+    
+    image_urls = [f'{request.url_root}{images_directory}{image}' for image in images]
+
+    response =  jsonify(image_urls)
+    response.headers['Access-Contol-Allow-Origin'] = '*'
+    return response
+
 
 
 @game.route("/get-image-mods/", methods=["GET"])
@@ -153,14 +162,6 @@ def getimagemods():
 
     current_img = request.args.get('currentImg') + '.jpg'
     layer = int(request.args.get('layer')) - 1
-    #upload_dir_raster = "hex_be" + Config.UPLOAD_DIR_RASTER_DONE
-
-    #new_dir = secure_filename(user_id)
-    #file_name = secure_filename(current_img + ".jpg")
-
-    #upload_raster = os.path.join(upload_dir_raster, new_dir)
-    # path_to_img = os.path.join('', current_img + '.jpg')
-    # print(path_to_img)
     upload_dir_raster = Config.UPLOAD_DIR_LEVEL_DONE[layer]
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -172,8 +173,31 @@ def getimagemods():
     response.headers['Access-Contol-Allow-Origin'] = '*'
     return response
 
-    
 
+@game.route("/get-all-image-mods/", methods=["GET"])
+def getimagemods():
+
+    user_id = request.args.get('userID')
+    count = request.args.get('count')
+
+    layer = int(request.args.get('layer')) - 1
+    upload_dir_raster = Config.UPLOAD_DIR_LEVEL_DONE[layer]
+
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    images_directory = os.path.join(BASE_DIR, 'static', 'images', upload_dir_raster, user_id)
+
+    images = []
+    for i in range(0, len(count)):
+        images.append(str(i) + ".jpg")
+    
+    image_urls = [f'{request.url_root}{images_directory}{image}' for image in images]
+
+    response =  jsonify(image_urls)
+    response.headers['Access-Contol-Allow-Origin'] = '*'
+    return response
+
+
+ 
 
 @game.route("/erase/<int:id>")
 def erase(id):
