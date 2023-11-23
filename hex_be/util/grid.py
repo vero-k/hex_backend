@@ -22,7 +22,8 @@ MOD_RATE = {
 }
 
 
-
+# mod_tracker is a dictionary. mapping keys (1 ... nr_hex in string format) to an array of values ('original', ...)
+# array has 1 + max(level) entries 
 def gridIt_mods(img_width: int, img_height: int, hex_nr_width: int, hex_nr_height: int, img: Image, path_arr: str, level: int, difficulty: str):
 
         mod_rate = MOD_RATE[difficulty]

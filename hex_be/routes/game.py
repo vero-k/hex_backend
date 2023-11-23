@@ -142,13 +142,17 @@ def getallimages():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     images_directory = os.path.join(BASE_DIR, 'static', 'images', 'rastered', user_id)
 
-    images = []
-    for i in range(0, len(count)):
-        images.append(str(i) + ".jpg")
+    images_data = []
+    for i in range(count):
+        image_path = os.path.join(images_directory, f"{i}.jpg")
+        if os.path.exists(image_path):
+            with open(image_path, 'rb') as image_file:
+                image_data = image_file.read()
+                images_data.append(image_data)
+        else:
+            print(f"Image {i}.jpg not found.")
     
-    image_urls = [f'{request.url_root}{images_directory}{image}' for image in images]
-
-    response =  jsonify(image_urls)
+    response = jsonify([image.decode('latin1') for image in images_data])
     response.headers['Access-Contol-Allow-Origin'] = '*'
     return response
 
@@ -174,8 +178,8 @@ def getimagemods():
     return response
 
 
-@game.route("/get-all-image-mods/", methods=["GET"])
-def getimagemods():
+@game.route("/get-all-images-mods/", methods=["GET"])
+def getallimagesmods():
 
     user_id = request.args.get('userID')
     count = request.args.get('count')
