@@ -10,8 +10,10 @@ database.db
 
 .env
 .dev_dockerfile.txt
+instance/*
 
 hex_be/static/images/baseimg/*
-hex_be/static/images/levelone*
+hex_be/static/images/levelone/*
 hex_be/static/images/leveltwo/*
+hex_be/static/images/levelthree/*
 hex_be/static/images/rastered/*

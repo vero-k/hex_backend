@@ -18,11 +18,19 @@ These instructions will get you a copy of the project up and running on your loc
 git clone []
 cd []
 
+python3 -m venv .venv
+py -3 -m venv .venv
+
 # Activate Virtual Environment
-source myenv/bin/activate
+source .venv/bin/activate
+source .venv/Scripts/activate
+
+
+pip install -r requirements.txt
 
 # set ENV variable
-export FLASK_APP=run.py
+export FLASK_APP=run
+$env:FLASK_APP = "run"
 
 # run the application
 flask run
