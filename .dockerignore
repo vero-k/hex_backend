@@ -5,6 +5,7 @@
 .Python
 env/
 venv/
+.venv/
 .git
 .dockerignore
 Dockerfile

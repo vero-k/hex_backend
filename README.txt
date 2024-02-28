@@ -36,3 +36,8 @@ $env:FLASK_APP = "run"
 flask run
 
 There is a dockerfile in the respitory as well, if one wants to deploy the app in a docker container
+
+
+
+docker build --file=hex_backend/dev.backend.dockerfile -t backend_img .
+docker build --file=hex_backend/prod.backend.dockerfile -t backend_img_prod .

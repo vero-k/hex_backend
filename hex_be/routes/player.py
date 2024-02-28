@@ -8,6 +8,10 @@ from ..db_module import get_db
 
 playr = Blueprint("playr", __name__)
 
+@playr.route('/test/')
+def testplayer():
+    return jsonify({"message": "ok"}), 200
+    
 
 
 @playr.route('/newplayer/')
